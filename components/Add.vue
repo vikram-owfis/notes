@@ -23,7 +23,7 @@
                       <div class="flex-shrink-0">
                         <img
                           class="h-10 w-10 rounded-full"
-                          :src="`https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`"
+                          :src="`https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80`"
                           alt=""
                         />
                       </div>
@@ -34,7 +34,7 @@
                             class="font-medium text-gray-900"
                             @mouseover="showhover = true"
                             @mouseout="showhover = false"
-                            >sankati swetha
+                            >Vikram Mantra Technology
                           </a>
 
                           <PencilSquareIcon
