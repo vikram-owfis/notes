@@ -38,20 +38,7 @@
                     class="block text-sm font-medium leading-6 text-gray-900"
                     >Note</label
                   >
-                  <div class="relative mt-2">
-                    <input
-                      v-model="prefilledNote"
-                      type="text"
-                      name="name"
-                      id="name"
-                      class="peer block w-full border-0 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Jane Smith"
-                    />
-                    <div
-                      class="absolute inset-x-0 bottom-0 border-t border-gray-300 peer-focus:border-t-2 peer-focus:border-indigo-600"
-                      aria-hidden="true"
-                    />
-                  </div>
+
                   <button
                     @click="putClick"
                     :key="render"
@@ -80,44 +67,4 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { CheckIcon } from "@heroicons/vue/24/outline";
-const getData = await useAuthLazyFetch(
-  "https://v1-orm-lib.mars.hipso.cc/notes/entity/TASKS/1360?project_id=111&offset=0&limit=100&sort_column=id&sort_direction=desc"
-);
-const note = ref("");
-note.value = getData.data._rawValue;
-const open = ref(true);
-const props = defineProps({
-  filled_note: {
-    type: String,
-    default: "",
-  },
-  uid: {
-    type: String,
-  },
-});
-const prefilledNote = ref("");
-const emit = defineEmits(["openModal"]);
-prefilledNote.value = props.filled_note;
-const render = ref(0);
-async function putClick() {
-  let body = {
-    entity_id: "1360",
-    project_id: "111",
-    note: prefilledNote.value,
-    entity: "TASKS",
-    uid: props.uid,
-  };
-  const { data: items, pending } = await useAuthLazyFetchPut(
-    `https://v1-orm-lib.mars.hipso.cc/notes/${props.uid}`,
-    { body: JSON.stringify(body) }
-  );
-
-  note.value.forEach((item, index) => {
-    if (item.uid == props.uid) {
-      render.value = render.value + 1;
-      item.note = prefilledNote.value;
-    }
-  });
-  emit("openModal");
-}
 </script>

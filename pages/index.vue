@@ -1,9 +1,6 @@
 <template>
   <div>
-    <!-- <Edit /> -->
-
     <Add />
-    <Main />
   </div>
 </template>
 

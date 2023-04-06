@@ -3,17 +3,16 @@
     <div
       class="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl"
     >
-      <h1 class="font-semibold leading-6 text-gray-900 mb-3 text-2xl">Notes</h1>
+      <h1 class="font-semibold leading-6 text-gray-900 mb-3 text-2xl">
+        Candidates
+      </h1>
       <div class="space-y-6 lg:col-span-2 lg:col-start-1">
-        <!-- Description list-->
-
-        <!-- Comments-->
         <section aria-labelledby="notes-title">
           <div class="bg-white shadow sm:overflow-hidden sm:rounded-lg">
             <div class="divide-y divide-gray-200">
               <div class="px-4 py-5 sm:px-6">
                 <h2 id="notes-title" class="text-lg font-medium text-gray-900">
-                  Notes
+                  Mock interviews
                 </h2>
               </div>
               <div class="px-4 py-6 sm:px-6">
@@ -23,7 +22,7 @@
                       <div class="flex-shrink-0">
                         <img
                           class="h-10 w-10 rounded-full"
-                          :src="`https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80`"
+                          :src="`https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`"
                           alt=""
                         />
                       </div>
@@ -34,33 +33,61 @@
                             class="font-medium text-gray-900"
                             @mouseover="showhover = true"
                             @mouseout="showhover = false"
-                            >Vikram Mantra Technology
+                          >
+                            <p>{{ comment.name }}</p>
                           </a>
 
                           <PencilSquareIcon
                             class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500 ml-3 mr-3"
-                            @click="openedit(comment.note, comment.uid)"
                           />
 
                           <TrashIcon
                             class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                            @click="deleteNotes(comment.uid)"
                           />
                         </div>
-                        <div class="mt-1 text-sm text-gray-700">
-                          <p>{{ comment.note }}</p>
+                        <div class="container mx-auto py-6">
+                          <table class="table-auto">
+                            <thead>
+                              <tr>
+                                <th class="px-4 py-2">Type</th>
+                                <th class="px-4 py-2">max_time_allowed</th>
+                                <th class="px-4 py-2">due_date</th>
+                                <th class="px-4 py-2">difficulty_level</th>
+                                <th class="px-4 py-2">description</th>
+                                <th class="px-4 py-2">questions</th>
+                                <th class="px-4 py-2">
+                                  multiple_attempts_allowed
+                                </th>
+                                <th class="px-4 py-2">instructions</th>
+                                <th class="px-4 py-2">status</th>
+                                <th class="px-4 py-2">owner_id</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="border px-4 py-2">practice</td>
+                                <td class="border px-4 py-2">0</td>
+                                <td class="border px-4 py-2">
+                                  2023-04-06T12:34:06.660Z
+                                </td>
+                                <td class="border px-4 py-2">Easy</td>
+                                <td class="border px-4 py-2">welcome</td>
+                                <td class="border px-4 py-2">?</td>
+                                <td class="border px-4 py-2">0</td>
+                                <td class="border px-4 py-2">0</td>
+                                <td class="border px-4 py-2">0</td>
+                                <td class="border px-4 py-2">
+                                  2023-04-06T12:34:06.660Z
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
+
                         <div class="mt-2 space-x-2 text-sm">
                           <span class="font-medium text-gray-500">{{
                             comment.date
                           }}</span>
-
-                          <button
-                            type="button"
-                            class="font-medium text-gray-900"
-                          >
-                            Reply
-                          </button>
                         </div>
                       </div>
                     </div>
@@ -68,20 +95,12 @@
                 </ul>
               </div>
             </div>
+
             <div class="bg-gray-50 px-4 py-6 sm:px-6">
               <div class="flex space-x-3">
-                <div class="flex-shrink-0">
-                  <img
-                    class="h-10 w-10 rounded-full"
-                    :src="user.imageUrl"
-                    alt=""
-                  />
-                </div>
                 <div class="min-w-0 flex-1">
-                  <!-- <form action="prevent.Default"> -->
                   <form>
                     <div>
-                      <label for="comment" class="sr-only">About</label>
                       <textarea
                         id="comment"
                         name="comment"
@@ -91,6 +110,7 @@
                         v-model="notesValue"
                       />
                     </div>
+                    <!-- end -->
                     <div class="mt-3 flex items-center justify-between">
                       <a
                         href="#"
@@ -180,49 +200,28 @@ async function postData() {
       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiN2ZiMzBkNzhmM2NmNGEwZmJiZWNkZjJkOGM2ZjNhMGEiLCJkIjoiMTY4MDA3NyIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzM0NzR9.QjMEQKeWqKdjLekJkiFGTdhJ3iwilHM5Aa9FEqbWvOI`,
     },
     body: {
-      entity_id: "1360",
-      project_id: "111",
-      note: notesValue,
-      entity: "TASKS",
+      name: notesValue,
+      type: "practice",
+      max_time_allowed: 0,
+      due_date: "2023-04-06T12:34:06.660Z",
+      difficulty_level: "Easy",
+      description: "string",
+      questions: {},
+      multiple_attempts_allowed: 0,
+      instructions: {},
+      status: 0,
+      owner_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      last_modified_date: "2023-04-06T12:34:06.660Z",
     },
   };
   const data = await useAuthLazyFetchPost(
-    "https://v1-orm-lib.mars.hipso.cc/notes/TASKS/1360",
+    "https://v7-stark-db-orm.mercury.infinity-api.net/api/mock-interviews/",
     postoptions
   );
 }
 const getData = useAuthLazyFetch(
-  "https://v1-orm-lib.mars.hipso.cc/notes/entity/TASKS/1360?project_id=111&offset=0&limit=100&sort_column=id&sort_direction=desc"
+  "https://v7-stark-db-orm.mercury.infinity-api.net/api/mock-interviews/?offset=0&limit=100&sort_column=id&sort_direction=desc"
 );
 const note = ref("");
 note.value = getData.data._rawValue;
-console.log("note-->", note.value);
-
-function openedit(data: any, id: any) {
-  console.log("openEditModal.value-->", openEditModal.value);
-  openEditModal.value = true;
-  prefilledData.value = data;
-  prefilledDataUId.value = id;
-}
-function deleteNotes(id: any) {
-  const putOptions = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiN2ZiMzBkNzhmM2NmNGEwZmJiZWNkZjJkOGM2ZjNhMGEiLCJkIjoiMTY4MDA3NyIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzM0NzR9.QjMEQKeWqKdjLekJkiFGTdhJ3iwilHM5Aa9FEqbWvOI`,
-    },
-  };
-  const addTemplateData = useAuthLazyFetchDelete(
-    `https://v1-orm-lib.mars.hipso.cc/notes/${id}`,
-
-    putOptions
-  );
-  note.value.forEach((item, index) => {
-    if (item.uid == id) {
-      console.log(index);
-      note.value.splice(index, 1);
-    }
-  });
-}
 </script>

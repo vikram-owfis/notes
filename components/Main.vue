@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <CollectionAdd />
+    <Add />
   </div>
 </template>
   
