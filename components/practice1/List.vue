@@ -37,14 +37,28 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
+import { defineEmits, defineProps } from "vue";
 const props = defineProps({
   details: {
     type: Array,
   },
 });
 const emit = defineEmits(["editdata"]);
+const deleteData = async (id: any) => {
+  const deleteOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiN2ZiMzBkNzhmM2NmNGEwZmJiZWNkZjJkOGM2ZjNhMGEiLCJkIjoiMTY4MDA3NyIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzM0NzR9.QjMEQKeWqKdjLekJkiFGTdhJ3iwilHM5Aa9FEqbWvOI`,
+    },
+  };
 
+  await useAuthLazyFetchDelete(
+    `https://v1-orm-lib.mars.hipso.cc/api/pages/${id.uid}`,
+    deleteOptions
+  );
+};
 const editData = (detail: any, index: any) => {
   // const editOptions = {
   //   method: "PUT",
