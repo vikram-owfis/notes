@@ -1,12 +1,23 @@
 <template>
-  <div class="flex justify-center">
-    <practice1Add @inputData="inputData" />
-    <practice1List class="mr-20" :details="details" @editdata="openEditModal" />
+  <div class="flex">
+    <div :key="re_render">
+      <practice1Add @inputData="inputData" />
+      <practice1Edit @customPutemit="edited" :data="editcallDetails" />
+    </div>
+    <div>
+      <practice1List
+        class="mr-20 w-[30rem]"
+        :details="details"
+        @editdata="openEdit"
+      />
+    </div>
   </div>
 </template>
 <script setup>
 const details = ref([]);
-
+const is_edit = ref(false);
+const re_render = ref(false);
+const editcallDetails = ref({});
 async function inputData(input) {
   const postoptions = {
     method: "POST",
@@ -39,11 +50,36 @@ const getData = useAuthLazyFetch(
 );
 details.value = getData.data._rawValue;
 
-// PUT call
-
-const openEditModal = async (detail, index) => {
-  console.log("detail,index", detail, index);
+const openEdit = (data) => {
+  console.log("data---------->", data);
+  is_edit.value = true;
+  re_render.value++;
+  editcallDetails.value = data;
 };
+
+// const customPut = async (data) => {
+//   const putOptions = {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiN2ZiMzBkNzhmM2NmNGEwZmJiZWNkZjJkOGM2ZjNhMGEiLCJkIjoiMTY4MDA3NyIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzM0NzR9.QjMEQKeWqKdjLekJkiFGTdhJ3iwilHM5Aa9FEqbWvOI`,
+//     },
+//     body: { data },
+//   };
+//   const putURL = await useAuthLazyFetchPut(
+//     `https://v1-orm-lib.mars.hipso.cc/api/pages/${data.uid}`,
+//     putOptions
+//   );
+// };
+
+async function edited(data) {
+  console.log("data", data);
+  const putOptions = {};
+  await useAuthLazyFetchPut(
+    `https://v1-orm-lib.mars.hipso.cc/api/pages/${data.uid}`,
+    putOptions
+  );
+}
 </script>
 
 
