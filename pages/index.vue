@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Add />
+    <!-- <practice1Main /> -->
+    <!-- <Add /> -->
+    <!-- <practise2Main /> -->
+    <practice3Main />
   </div>
 </template>
 
