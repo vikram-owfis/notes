@@ -85,6 +85,5 @@ const last = ref("");
 const emit = defineEmits(["inputData"]);
 function send() {
   emit("inputData", { name: firsht, category: last });
-  console.log("inputData", inputData);
 }
 </script>

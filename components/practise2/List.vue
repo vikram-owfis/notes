@@ -15,7 +15,7 @@
             <td class="px-4 py-2">{{ detail.category }}</td>
             <td class="px-4 py-2">
               <button
-                @click="editData(detail, index)"
+                @click="emits('edit', detail)"
                 class="px-3 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
               >
                 Edit
@@ -34,12 +34,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, ref } from "vue";
 const props = defineProps({
   details: {
     type: Array,
   },
 });
+
+const emits = defineEmits(["edit"]);
 const deleteData = async (id: any) => {
   const deleteOptions = {
     method: "DELETE",
