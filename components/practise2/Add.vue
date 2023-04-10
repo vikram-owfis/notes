@@ -8,7 +8,7 @@
       Add Contact
     </button>
 
-   
+    <TransitionRoot as="template" :show="open">
       <Dialog as="div" class="relative z-10" @close="open = false">
         <div class="fixed inset-0" />
 
